@@ -32,11 +32,11 @@ jobs:
     steps:
     - name: Checkout this repository
       uses: actions/checkout@v4
-    - name: touch folder for manual trbuild
+    - name: touch folder for manual rebuild
       run: |
-        if [ "${{ inputs.print_tags }}" != "" ]; then
-            echo  ${{ inputs.print_tags }}
-            touch ${{ inputs.print_tags }}/.rebuildIt
+        if [ "${{ inputs.rebuild_path }}" != "" ]; then
+            echo  ${{ inputs.rebuild_path }}
+            touch ${{ inputs.rebuild_path }}/.rebuildIt
         fi
     - name: Get modified helm paths
       id: modified-helm-paths
