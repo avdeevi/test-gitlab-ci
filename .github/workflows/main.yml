@@ -38,7 +38,7 @@ jobs:
         ls -la
         if [ "${{ inputs.rebuild_path }}" != "" ]; then
             echo  ${{ inputs.rebuild_path }}
-            touch ${{ inputs.rebuild_path }}/.rebuildIt
+            touch ${{ inputs.rebuild_path }}/rebuildIt
             ls -la ${{ inputs.rebuild_path }}/rebuildIt
         fi
     - name: Get modified helm paths
