@@ -1,0 +1,26 @@
+name: Image build
+run-name: Build ${{ inputs.image }} image
+on:
+  workflow_call:
+    inputs:
+      image:
+        required: true
+        type: string
+      base_tag:
+        required: false
+        type: string
+        default: "1.1."
+jobs:
+  set-variables:
+    name: Set variables
+    runs-on: ubuntu-latest
+    outputs:
+      CONTEXT: ${{ steps.prepare.outputs.CONTEXT }}
+      REPO_NAME: ${{ steps.prepare.outputs.REPO_NAME }}
+      TAG: ${{ steps.prepare.outputs.TAG }}
+      BUILD_ARGS: ${{ steps.prepare.outputs.BUILD_ARGS }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Set variables
+      run: echo "build"

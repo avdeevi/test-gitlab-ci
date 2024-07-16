@@ -1,0 +1,23 @@
+---
+    name: Build Helm chart
+    run-name: Build ${{ inputs.chart }}
+    on:
+      workflow_call:
+        inputs:
+          chart:
+            required: true
+            type: string
+    jobs:
+      set-variables:
+        name: Set variables
+        runs-on: ${{ vars.ST_RUNNER_LABEL }}
+        outputs:
+          APP_NAME: ${{ steps.prepare.outputs.APP_NAME }}
+          CHART_NAME: ${{ steps.prepare.outputs.CHART_NAME }}
+          CHART_VERSION: ${{ steps.prepare.outputs.CHART_VERSION }}
+        steps:
+        - name: Checkout this repository
+          uses: actions/checkout@v4
+        - name: Prepare chart variables
+          id: prepare
+          run: echo "build helm"
