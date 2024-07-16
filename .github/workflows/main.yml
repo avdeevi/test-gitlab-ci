@@ -81,7 +81,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        chart: ${{ fromJSON(needs.get-helm-paths.outputs.matrix) }} ${{needs.add-manual-path.outputs.matrix }}
+        chart: ${{ fromJSON(needs.add-manual-path.outputs.matrix) }}
       fail-fast: false
     uses: ./.github/workflows/helm-build.yml
     secrets: inherit
