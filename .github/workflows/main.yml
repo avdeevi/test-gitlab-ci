@@ -16,7 +16,12 @@ jobs:
     - name: List all modified image paths
       run: echo 'linter'
 
-    
+  touch_rebuild:
+    name: touch folder for manual rebuild
+    runs-on: ubuntu-latest
+    steps:
+    - name: List all modified image paths
+      run: echo 'linter'
 
   get-helm-paths:
     name: Get list of modified helm charts
@@ -27,6 +32,12 @@ jobs:
     steps:
     - name: Checkout this repository
       uses: actions/checkout@v4
+    - name: touch folder for manual trbuild
+      run: |
+        if [ "${{ inputs.print_tags }}" != "" ]; then
+            echo  ${{ inputs.print_tags }}
+            touch ${{ inputs.print_tags }}/.rebuildIt
+        fi
     - name: Get modified helm paths
       id: modified-helm-paths
       uses: tj-actions/changed-files@v42
