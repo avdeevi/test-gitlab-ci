@@ -3,7 +3,11 @@ name: Trigger workflow for modified apps
 on:
   push:
   workflow_dispatch:
-
+    inputs:
+      rebuild_path:
+        description: 'path to helm-chart or docker-image to rebuild'
+        required: true
+        type: string
 jobs:
   yamllint:
     name: Yamllint for github workflows
