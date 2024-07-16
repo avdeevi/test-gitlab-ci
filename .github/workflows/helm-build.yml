@@ -10,7 +10,7 @@
     jobs:
       set-variables:
         name: Set variables
-        runs-on: ${{ vars.ST_RUNNER_LABEL }}
+        runs-on: ubuntu-latest
         outputs:
           APP_NAME: ${{ steps.prepare.outputs.APP_NAME }}
           CHART_NAME: ${{ steps.prepare.outputs.CHART_NAME }}
