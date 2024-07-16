@@ -2,6 +2,8 @@
 name: Trigger workflow for modified apps
 on:
   push:
+  workflow_dispatch:
+
 jobs:
   yamllint:
     name: Yamllint for github workflows
