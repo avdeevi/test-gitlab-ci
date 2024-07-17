@@ -57,6 +57,7 @@ jobs:
     - name: List all modified image paths
       run: |
         echo '${{ steps.modified-images.outputs.all_modified_files }}'
+        echo "GITHUB_OUTPUT=$GITHUB_OUTPUT"
         cat $GITHUB_OUTPUT
         uname -a
        
