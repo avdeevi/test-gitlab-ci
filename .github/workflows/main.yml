@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       rebuild_path:
-        description: 'path to helm-chart or docker-image to rebuild'
+        description: 'path to the Docker image folder that needs to be rebuilt\nfor example cloud-deploy/images/deploy'
         required: false
         type: string
 
