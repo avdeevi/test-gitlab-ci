@@ -64,7 +64,7 @@ jobs:
       run: echo '${{ steps.modified-images.outputs.all_modified_files }}'
     - name: add manual path
       run: |  
-        all_modified_files=$(python3 -c "l1=${{ steps.modified-images.outputs.all_modified_files }}; l1.extend(["${{inputs.rebuild_path}}"]); print(l1)")
+        all_modified_files=$(python3 -c 'l1=${{ steps.modified-images.outputs.all_modified_files }}; l1.extend(["${{inputs.rebuild_path}}"]); print(l1)')
         echo $all_modified_files
 
 
