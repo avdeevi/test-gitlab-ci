@@ -58,6 +58,7 @@ jobs:
       run: |
         echo '${{ steps.modified-images.outputs.all_modified_files }}'
         cat $GITHUB_OUTPUT
+        uname -a
        
 
   build-helm:
