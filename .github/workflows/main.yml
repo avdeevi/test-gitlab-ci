@@ -42,7 +42,7 @@ jobs:
     - name: add manual path
       id: manual_path
       run: |
-        if [ ${{ github.event_name == 'workflow_dispatch' }} ]; then 
+        if [ ${{ github.event_name }} == 'workflow_dispatch' ]; then 
           echo "all_modified_files=[\"${{inputs.rebuild_path}}\"]" >> "$GITHUB_OUTPUT"
         else 
            echo "all_modified_files=${{ steps.modified-images.outputs.all_modified_files}}" >> "$GITHUB_OUTPUT"
