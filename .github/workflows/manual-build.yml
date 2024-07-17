@@ -24,10 +24,10 @@
         steps:
         - name: Get modified images
           id: modified-images
-          run: echo "all_modified_files=[ toJson${{inputs.rebuild_path}} ]" >> "$GITHUB_OUTPUT"
+          run: echo "all_modified_files=[ \"${{inputs.rebuild_path}}\" ]" >> "$GITHUB_OUTPUT"
          
         - name: List all modified image paths
-          run: echo "[ ${{ toJson(inputs.rebuild_path) }} ]"
+          run: echo "[ ${{ \"inputs.rebuild_path\" }} ]"
     
     
       build-container-images:
