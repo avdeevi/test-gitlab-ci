@@ -1,7 +1,6 @@
 ---
     name: Trigger workflow for modified apps
     on:
-      push:
       workflow_dispatch:
         inputs:
           rebuild_path:
