@@ -22,19 +22,11 @@
         outputs:
           matrix: ${{ steps.modified-helm-paths.outputs.all_modified_files }}
         steps:
-        - name: Checkout this repository
-          uses: actions/checkout@v4
         - name: Get modified helm paths
           id: modified-helm-paths
-          uses: tj-actions/changed-files@v42
-          with:
-            dir_names: true
-            dir_names_max_depth: '2'
-            dir_names_exclude_current_dir: true
-            files_ignore: '.github/**'
-            files: '*/helm/'
-            json: true
-            escape_json: false
+          run: echo "helm"
+
+
         - name: List all modified helm paths
           run: echo '${{ steps.modified-helm-paths.outputs.all_modified_files }}'
     
@@ -45,42 +37,22 @@
         outputs:
           matrix: ${{ steps.modified-images.outputs.all_modified_files }}
         steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
         - name: Get modified images
           id: modified-images
-          uses: tj-actions/changed-files@v42
-          with:
-            dir_names: true
-            dir_names_max_depth: '3'
-            dir_names_exclude_current_dir: true
-            files_ignore: '.github/**'
-            files: '*/images/'
-            json: true
-            escape_json: false
+          run: echo "image"
+         
         - name: List all modified image paths
           run: echo '${{ steps.modified-images.outputs.all_modified_files }}'
     
-      add-manual-path:
-        name: add additional path from manual trigger
-        needs: get-helm-paths
-        runs-on: ubuntu-latest
-        steps:
-        - name: add path
-          run: echo "${{inputs.rebuild_path}}"
-        outputs:
-          matrix: ${{inputs.rebuild_path}}
-    
       build-helm:
-        if: ${{ needs.get-helm-paths.outputs.matrix != '[]' ||  needs.add-manual-path.outputs.matrix != '' }}
+        if: ${{ needs.get-helm-paths.outputs.matrix != '[]' }}
         name: Build Helm
         needs: 
           - get-helm-paths
-          - add-manual-path
         strategy:
           max-parallel: 1
           matrix:
-            chart: ${{ fromJSON(needs.add-manual-path.outputs.matrix) }}
+            chart: ${{ fromJSON(needs.get-helm-paths.outputs.matrix) }}
           fail-fast: false
         uses: ./.github/workflows/helm-build.yml
         secrets: inherit
