@@ -24,7 +24,7 @@
         steps:
         - name: Get modified images
           id: modified-images
-          run: echo "all_modified_files=${{inputs.rebuild_path}}" >> "$GITHUB_OUTPUT"
+          run: echo "all_modified_files=[\"${{inputs.rebuild_path}}\"]" >> "$GITHUB_OUTPUT"
          
         - name: List all modified image paths
           run: echo '${{ steps.modified-images.outputs.all_modified_files }}'
