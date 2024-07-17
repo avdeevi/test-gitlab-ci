@@ -6,7 +6,7 @@ on:
     inputs:
       rebuild_path:
         description: 'path to helm-chart or docker-image to rebuild'
-        required: true
+        required: false
         type: string
 
 jobs:
