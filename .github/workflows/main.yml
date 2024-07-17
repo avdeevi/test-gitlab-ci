@@ -55,7 +55,10 @@ jobs:
         json: true
         escape_json: false
     - name: List all modified image paths
-      run: echo '${{ steps.modified-images.outputs.all_modified_files }}'
+      run: |
+        echo '${{ steps.modified-images.outputs.all_modified_files }}'
+        cat $GITHUB_OUTPUT
+       
 
   build-helm:
     if: ${{ needs.get-helm-paths.outputs.matrix != '[]' }}
