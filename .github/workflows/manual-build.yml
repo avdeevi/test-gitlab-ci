@@ -27,7 +27,7 @@
           run: echo "all_modified_files=[ toJson${{inputs.rebuild_path}} ]" >> "$GITHUB_OUTPUT"
          
         - name: List all modified image paths
-          run: echo '${{ toJson(inputs.rebuild_path) }}'
+          run: echo "[ ${{ toJson(inputs.rebuild_path) }} ]"
     
     
       build-container-images:
