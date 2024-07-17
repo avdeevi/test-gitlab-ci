@@ -39,13 +39,13 @@ jobs:
         escape_json: false
     - name: List all modified image paths
       run: echo '${{ steps.modified-images.outputs.all_modified_files }}'
-    - name: add manual path
+    - name: add manual pathd
       id: manual_path
       run: |
         if [ ${{ github.event_name }} == 'workflow_dispatch' ] and "${{inputs.rebuild_path}}" != "" ; then 
           echo "all_modified_files=[\"${{inputs.rebuild_path}}\"]" >> "$GITHUB_OUTPUT"
         else 
-           echo "all_modified_files=${{ steps.modified-images.outputs.all_modified_files}}" >> "$GITHUB_OUTPUT"
+           echo "all_modified_files='${{ steps.modified-images.outputs.all_modified_files}}'" >> "$GITHUB_OUTPUT"
         fi
     - name: list last modified image paths
       run:  echo '${{ steps.manual_path.outputs.all_modified_files }}'
