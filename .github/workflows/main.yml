@@ -63,6 +63,10 @@ jobs:
         cat $GITHUB_OUTPUT
         ls -la $GITHUB_OUTPUT
         uname -a
+    - name: second step
+      run: |
+        echo "GITHUB_OUTPUT=$GITHUB_OUTPUT"
+
 
 
 
