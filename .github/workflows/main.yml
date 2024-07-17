@@ -63,8 +63,7 @@ jobs:
         cat $GITHUB_OUTPUT
         ls -la $GITHUB_OUTPUT
         uname -a
-    - name: other step
-      run:  echo "GITHUB_OUTPUT="
+
 
 
   build-helm:
