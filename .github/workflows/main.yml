@@ -2,6 +2,12 @@
 name: Trigger workflow for modified apps
 on:
   push:
+  workflow_dispatch:
+    inputs:
+      rebuild_path:
+        description: 'path to helm-chart or docker-image to rebuild'
+        required: true
+        type: string
 
 jobs:
   yamllint:
@@ -54,20 +60,12 @@ jobs:
         files: '*/images/'
         json: true
         escape_json: false
-  
     - name: List all modified image paths
-      run: |
-        echo "test1=\"test1\"" >> $GITHUB_OUTPUT
-        echo '${{ steps.modified-images.outputs.all_modified_files }}'
-        echo "GITHUB_OUTPUT=$GITHUB_OUTPUT"
-        cat $GITHUB_OUTPUT
-        ls -la $GITHUB_OUTPUT
-        uname -a
-    - name: second step
-      run: |
-        echo "GITHUB_OUTPUT=$GITHUB_OUTPUT"
-
-
+      run: echo '${{ steps.modified-images.outputs.all_modified_files }}'
+    - name: add manual path
+      run: |  
+        echo "all_modified_files=$(python3 -c "l1=${{ steps.modified-images.outputs.all_modified_files }}; l1.extend(["${{inputs.rebuild_path}}"]); print(l1))"
+   
 
 
   build-helm:
