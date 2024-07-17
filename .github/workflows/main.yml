@@ -63,13 +63,12 @@ jobs:
       run: echo '${{ steps.modified-images.outputs.all_modified_files }}'
 
   add-manual-path:
-    if: inputs.rebuild_path
     name: add additional path from manual trigger
     needs: get-helm-paths
     runs-on: ubuntu-latest
     steps:
     - name: add path
-      run: echo "fake job"
+      run: echo "${{inputs.rebuild_path}}"
     outputs:
       matrix: ${{inputs.rebuild_path}}
 
