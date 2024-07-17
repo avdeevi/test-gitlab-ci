@@ -1,8 +1,2 @@
 FROM: ubuntu
 
-
-
-
-
-
-
