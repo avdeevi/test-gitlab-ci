@@ -45,7 +45,7 @@ jobs:
     needs: yamllint
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.modified-images.outputs.all_modified_files }}
+      matrix: ${{ steps.manual_path.outputs.all_modified_files }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -63,9 +63,13 @@ jobs:
     - name: List all modified image paths
       run: echo '${{ steps.modified-images.outputs.all_modified_files }}'
     - name: add manual path
-      run: |  
-        all_modified_files=$(python3 -c 'l1=${{ steps.modified-images.outputs.all_modified_files }}; l1.extend(["${{inputs.rebuild_path}}"]); print(l1)')
-        echo $all_modified_files
+      id: manual_path
+      run: |
+        if [ ${{ github.event_name == 'workflow_dispatch' }} ]; then 
+          echo "all_modified_files=[\"${{inputs.rebuild_path}}\"]" >> "$GITHUB_OUTPUT"
+        else 
+           echo "all_modified_files=${{ steps.modified-images.outputs.all_modified_files}}" >> "$GITHUB_OUTPUT"
+        fi
 
 
   build-helm:
