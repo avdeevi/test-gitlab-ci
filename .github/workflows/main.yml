@@ -47,6 +47,8 @@ jobs:
         else 
            echo "all_modified_files=${{ steps.modified-images.outputs.all_modified_files}}" >> "$GITHUB_OUTPUT"
         fi
+    - name: list last modified image paths
+      run:  echo '${{ steps.manual_path.outputs.all_modified_files }}'
 
   build-container-images:
     if: ${{ needs.get-images-paths.outputs.matrix != '[]' }}
