@@ -64,8 +64,8 @@ jobs:
         ls -la $GITHUB_OUTPUT
         uname -a
     - name: other step
-      run:  echo "GITHUB_OUTPUT=$GITHUB_OUTPUT"
-       
+      run:  echo "GITHUB_OUTPUT="
+
 
   build-helm:
     if: ${{ needs.get-helm-paths.outputs.matrix != '[]' }}
